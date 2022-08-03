@@ -1,4 +1,4 @@
-deployment_id = "cluster0"
+deployment_id = "cluster1"
 domain  = "aqws.lakis.eu" # zone should dbe set to main domain
 
 # GKE
@@ -16,6 +16,10 @@ gke_project_id = "klive-350621"
 
 # E-mail for requesting certificate from LE
 cert_email       = "mlody3k@gmail.com"
+
+# Webhook endpoint & token:
+flux_webhook_address = "flux944.lakis.eu"
+flux_webhook_token   = "duck"
 
 # Versions of infrastructure services
 flux_version         = "v0.31.5"

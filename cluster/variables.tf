@@ -16,6 +16,9 @@ variable "cloudflare_zone" { }
 # For requesting certificates in LE
 variable "cert_email" { }
 
+# CD webhook
+variable "flux_webhook_address" { }
+
 variable "flux_version" { }
 variable "cert_manager_version" { }
 variable "traefik_version" { } 

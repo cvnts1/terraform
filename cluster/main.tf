@@ -14,9 +14,11 @@ module k8s_infra {
   cloudflare_email = var.cloudflare_email
   cloudflare_api_key = var.cloudflare_api_key
   cert_email = var.cert_email
+
   flux_version = var.flux_version
   cert_manager_version = var.cert_manager_version
   traefik_version = var.traefik_version
+
 }
 
 module dns {
@@ -32,7 +34,9 @@ module dns {
 
 #module cd {
 #  source = "./../modules/cd"
-#  target_namespace = flux_system
+
+#  flux_webhook_address = var.flux_webhook_address
+#  flux_webhook_token   = var.flux_webhook_token
 
 #  image_update_automations = {
 #    server = "harbor.lakis.eu/cvnts1/server"
