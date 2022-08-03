@@ -1,5 +1,5 @@
 module gke_cluster {
-  source = "./../../modules/gke"
+  source = "./../modules/gke"
 
   deployment_id = var.deployment_id
   num_nodes = var.num_nodes
@@ -9,7 +9,7 @@ module gke_cluster {
 }
 
 module k8s_infra {
-  source = "./../../modules/kubernetes-infra"
+  source = "./../modules/kubernetes-infra"
 
   cloudflare_email = var.cloudflare_email
   cloudflare_api_key = var.cloudflare_api_key
@@ -20,7 +20,7 @@ module k8s_infra {
 }
 
 module dns {
-  source = "./../../modules/dns"
+  source = "./../modules/dns"
 
   cloudflare_email = var.cloudflare_email
   cloudflare_api_key = var.cloudflare_api_key
@@ -30,12 +30,20 @@ module dns {
   ip = module.k8s_infra.load_balancer_ip
 }
 
-module cd {
-  source = "./../../modules/flux-control-plane"
-}
+#module cd {
+#  source = "./../modules/cd"
+#  target_namespace = flux_system
+
+#  image_update_automations = {
+#    server = "harbor.lakis.eu/cvnts1/server"
+#  }
+#  webhook_token = "duck"
+
+#  depends_on = [module.k8s_infra]
+#}
 
 #module app {
-#  source = "./../../modules/app"
+#  source = "./../modules/app"
 #  namespace_name = "live"
 #  release_name = "live"
 #}

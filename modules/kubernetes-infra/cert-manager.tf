@@ -25,7 +25,7 @@ resource "kubernetes_secret" "cloudflare-api-key" {
     namespace = "cert-manager"
   }
   data = {
-    apikey = "${var.cf_api_key}"
+    apikey = "${var.cloudflare_api_key}"
   }
 
 depends_on = [
@@ -53,7 +53,7 @@ spec:
           apiKeySecretRef:
             key: apikey
             name: cloudflare-api-key
-          email: ${var.cf_email}
+          email: ${var.cloudflare_email}
 YAML
   depends_on = [
     kubernetes_secret.cloudflare-api-key,

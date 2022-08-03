@@ -1,6 +1,6 @@
 resource "google_container_cluster" "cluster" {
   name     = "${var.deployment_id}"
-  location = "${var.zone}"
+  location = "${var.gke_zone}"
   
   initial_node_count = var.num_nodes
 
