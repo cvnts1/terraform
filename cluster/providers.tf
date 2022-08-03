@@ -18,6 +18,25 @@ provider "google" {
   region  = var.gke_region
 }
 
+provider "helm" {
+  kubernetes {
+    host  = "https://${module.gke_cluster.cluster_endpoint}"
+    token = data.google_client_config.provider.access_token
+    cluster_ca_certificate = base64decode(module.gke_cluster.cluster_ca)
+  }
+}
+
+provider "kubectl" {
+  host  = "https://${module.gke_cluster.cluster_endpoint}"
+  token = data.google_client_config.provider.access_token
+  cluster_ca_certificate = base64decode(module.gke_cluster.cluster_ca)
+}
+
+provider "kubernetes" {
+  host  = "https://${module.gke_cluster.cluster_endpoint}"
+  token = data.google_client_config.provider.access_token
+  cluster_ca_certificate = base64decode(module.gke_cluster.cluster_ca)
+}
 
 provider "cloudflare" {
   email   = var.cloudflare_email
