@@ -10,11 +10,6 @@ metadata:
 spec:
   interval: 24h
   image: ${each.value}
-  secretRef:
-    name: registry-creds
 YAML
-
-  depends_on = [kubernetes_secret.registry-creds]
-
 
 }

@@ -3,15 +3,15 @@ resource "kubectl_manifest" "git-repository" {
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: GitRepository
 metadata:
-  name: repo
+  name: chart
   namespace: ${var.target_namespace}
 spec:
   gitImplementation: go-git
   interval: 24h
   secretRef:
-    name: repo-creds
+    name: chart-repo-dep-key
   timeout: 20s
-  url: ${var.repo.url}
+  url: ${var.chart_git_url}
 YAML
 
   wait = true
@@ -28,13 +28,9 @@ metadata:
   namespace: ${var.target_namespace}
 spec:
   interval: 5m0s
-  secretRef:
-    name: chartrepo-creds
   timeout: 1m0s
-  url: ${var.chartrepo.url}
+  url: ${var.chartrepo}
 YAML
 
   wait = true
-  depends_on = [kubernetes_secret.chartrepo-creds]
-
 }

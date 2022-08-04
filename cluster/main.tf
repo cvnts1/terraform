@@ -15,6 +15,8 @@ module k8s_infra {
   cloudflare_api_key = var.cloudflare_api_key
   cert_email = var.cert_email
 
+  flux_webhook_address = var.flux_webhook_address
+
   flux_version = var.flux_version
   cert_manager_version = var.cert_manager_version
   traefik_version = var.traefik_version
@@ -32,19 +34,29 @@ module dns {
   ip = module.k8s_infra.load_balancer_ip
 }
 
-#module cd {
-#  source = "./../modules/cd"
+module dns-flux {
+  source = "./../modules/dns"
 
-#  flux_webhook_address = var.flux_webhook_address
-#  flux_webhook_token   = var.flux_webhook_token
+  cloudflare_email = var.cloudflare_email
+  cloudflare_api_key = var.cloudflare_api_key
+  cloudflare_zone = var.cloudflare_zone
 
-#  image_update_automations = {
-#    server = "harbor.lakis.eu/cvnts1/server"
-#  }
-#  webhook_token = "duck"
+  domain = var.flux_webhook_address
+  ip = module.k8s_infra.load_balancer_ip
+}
 
-#  depends_on = [module.k8s_infra]
-#}
+
+module cd {
+  source = "./../modules/cd"
+
+  flux_webhook_token   = var.flux_webhook_token
+  image_update_automations = var.image_update_automations
+  chartrepo = var.chartrepo
+  chart_git_url = var.chart_git_url
+  chart_git_dep_key = var.chart_git_dep_key
+
+  depends_on = [module.k8s_infra]
+}
 
 #module app {
 #  source = "./../modules/app"

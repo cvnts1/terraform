@@ -11,7 +11,7 @@ spec:
   interval: 30s
   sourceRef:
     kind: GitRepository
-    name: repo
+    name: chart
   git:
     checkout:
       ref:
@@ -21,14 +21,14 @@ spec:
         email: ml3k@interia.pl
         name: fluxcd
       messageTemplate: |
-        (FluxCD) Update images
+        FluxCD: Update images
         {{ range .Updated.Images}}
         - {{ . }}
         {{ end }}
     push:
       branch: master
   update:
-    path: ${var.repo.patchPath}
+    path: "./cvnts1"
     strategy: Setters
 YAML
 

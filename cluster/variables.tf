@@ -18,6 +18,13 @@ variable "cert_email" { }
 
 # CD webhook
 variable "flux_webhook_address" { }
+variable "flux_webhook_token" { }
+
+# CD info
+variable image_update_automations { }
+variable chartrepo { }
+variable chart_git_url { }
+variable chart_git_dep_key { }
 
 variable "flux_version" { }
 variable "cert_manager_version" { }

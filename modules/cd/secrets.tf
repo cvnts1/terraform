@@ -1,50 +1,15 @@
 resource "kubernetes_secret" "repo-creds" {
   metadata {
-    name = "repo-creds"
+    name = "chart-repo-dep-key"
     namespace = var.target_namespace
   }
 
   data = {
-    username = var.repo.username
-    password = var.repo.password
+    identity = var.chart_git_dep_key
+    known_hosts = var.chart_git_known_hosts
   }
 
   type = "Opaque"
-
-}
-
-resource "kubernetes_secret" "chartrepo-creds" {
-  metadata {
-    name = "chartrepo-creds"
-    namespace = var.target_namespace
-  }
-
-  data = {
-    username = var.chartrepo.username
-    password = var.chartrepo.password
-  }
-
-  type = "Opaque"
-
-}
-
-resource "kubernetes_secret" "registry-creds" {
-  metadata {
-    name = "registry-creds"
-    namespace = var.target_namespace
-  }
-
-data = {
-    ".dockerconfigjson" = jsonencode({
-      auths = {
-        "${var.registry.hostname}" = {
-          "auth"     = base64encode("${var.registry.username}:${var.registry.password}")
-        }
-      }
-    })
-  }
-
-  type = "kubernetes.io/dockerconfigjson"
 
 }
 
@@ -55,10 +20,8 @@ resource "kubernetes_secret" "webhook-token" {
   }
 
   data = {
-    token = var.webhook_token
+    token = var.flux_webhook_token
   }
 
   type = "Opaque"
 }
-
-
