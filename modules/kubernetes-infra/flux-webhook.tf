@@ -29,7 +29,7 @@ spec:
   - client auth
 YAML
 
-depends_on = [helm_release.cert-manager]
+depends_on = [helm_release.cert-manager, kubectl_manifest.flux]
 }
 
 resource "kubernetes_service" "notifications" {

@@ -58,8 +58,9 @@ module cd {
   depends_on = [module.k8s_infra]
 }
 
-#module app {
-#  source = "./../modules/app"
-#  namespace_name = "live"
-#  release_name = "live"
-#}
+module app {
+  source = "./../modules/app"
+
+  health_message = var.health_message
+  domain = var.domain
+}

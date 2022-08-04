@@ -1,5 +1,8 @@
 deployment_id = "cluster1"
+
+# App
 domain  = "aqws.lakis.eu" # zone should dbe set to main domain
+health_message = "Health message from k8s"
 
 # GKE
 num_nodes      = 1

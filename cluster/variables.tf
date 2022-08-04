@@ -1,5 +1,8 @@
 variable "deployment_id" { }
+
+# App
 variable "domain" { } 
+variable "health_message" { }
 
 # GKE
 variable "num_nodes" { }
