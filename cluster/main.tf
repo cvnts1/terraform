@@ -63,4 +63,6 @@ module app {
 
   health_message = var.health_message
   domain = var.domain
+
+  depends_on = [module.cd]
 }
