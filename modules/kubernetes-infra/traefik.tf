@@ -14,6 +14,11 @@ resource "helm_release" "traefik" {
     value = false
   }
 
+  set {
+    name = "ports.web.redirectTo"
+    value = "websecure"
+  }
+
   depends_on = [
     kubernetes_namespace_v1.traefik
   ]
@@ -50,22 +55,3 @@ resource "kubernetes_service" "traefik" {
   ]
 
 }
-
-resource "kubectl_manifest" "https-only-crd" {
-  yaml_body = <<YAML
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: https-only
-  namespace: traefik
-spec:
-  redirectScheme:
-    scheme: https
-YAML
-
-depends_on = [
-    helm_release.traefik
-  ]
-
-}
-
