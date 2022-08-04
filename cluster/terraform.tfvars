@@ -1,7 +1,7 @@
 deployment_id = "cluster1"
 
 # App
-domain  = "aqws.lakis.eu" # zone should dbe set to main domain
+domain  = "aqws8.lakis.eu" # cf zone should be set to root domain
 health_message = "Health message from k8s"
 
 # GKE

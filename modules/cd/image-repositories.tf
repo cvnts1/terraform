@@ -12,4 +12,5 @@ spec:
   image: ${each.value}
 YAML
 
+  wait = true
 }

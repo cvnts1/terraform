@@ -15,5 +15,7 @@ spec:
       range: '>=0.0.0'
 YAML
 
+  wait = true
   depends_on = [kubectl_manifest.image-repositories]
+
 }

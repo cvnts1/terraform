@@ -32,6 +32,8 @@ spec:
     strategy: Setters
 YAML
 
+  wait = true
   depends_on = [kubectl_manifest.image-policies]
+
 
 }

@@ -51,6 +51,8 @@ resource "kubernetes_service" "notifications" {
 
   }
 
+  depends_on = [kubectl_manifest.flux]
+
 }
 
 resource "kubernetes_ingress_v1" "notifications" {
@@ -82,5 +84,7 @@ resource "kubernetes_ingress_v1" "notifications" {
       secret_name = "notification-controller-cert"
     }
   }
+
+  depends_on = [kubectl_manifest.flux]
 
 }
